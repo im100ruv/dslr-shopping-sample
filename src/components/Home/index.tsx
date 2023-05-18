@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Card, Menu, Dropdown, Button, Icon, Row, Col } from 'antd'
 import { collections } from '../../data/collection'
@@ -9,14 +9,40 @@ const { Meta } = Card
 const Home = () => {
   const navigate = useNavigate()
 
-  const [filteredList, setFilteredList] = useState(collections)
+  const [filteredList, setFilteredList] = useState([])
+
+  useEffect(() => {
+    setFilteredList(collections)
+  }, [])
+  
 
   const handleFilter = (e)=> {
-    console.log('filter ', e)
+    const resultList = collections.filter((item) => item.supplierName === e.key)
+    setFilteredList(resultList)
   }
 
   const handleSort = (e)=> {
-    console.log('sort ', e)
+    // eslint-disable-next-line array-callback-return
+    let resultList = []
+    switch (e.key) {
+      case 'priceHighToLow':
+        resultList = collections.sort((a, b) => b.listingPrice - a.listingPrice)
+        break
+      case 'priceLowToHigh':
+        resultList = collections.sort((a, b) => a.listingPrice - b.listingPrice)
+        break
+      case 'nameAscending':
+        resultList = collections.sort((a, b) => {
+          if (a.name < b.name) {
+            return -1
+          }
+          if (a.name > b.name) {
+            return 1
+          }
+          return 0
+        })
+    }
+    setFilteredList(resultList)
   }
   
   const filterMenu = (
@@ -30,7 +56,6 @@ const Home = () => {
     <Menu onClick={handleSort}>
       <Menu.Item key="priceHighToLow"> Price high to low </Menu.Item>
       <Menu.Item key="priceLowToHigh"> Price low to high </Menu.Item>
-      <Menu.Item key="ratingsHighToLow"> Ratings high to low </Menu.Item>
       <Menu.Item key="nameAscending"> Name ascending </Menu.Item>
     </Menu>
   )
@@ -64,8 +89,8 @@ const Home = () => {
 
       <Card className="listingContainer">
         <Row gutter={[{ xs: 8, sm: 16, md: 24, lg: 32 }, 20]}>
-          {filteredList.map((item) => (
-            <Col xs={12} sm={12} md={6} lg={4}>
+          {filteredList.length ? filteredList.map((item) => (
+            <Col xs={12} sm={12} md={6} lg={4} key={item.id}>
               <Card
                 hoverable
                 className="productCard"
@@ -90,7 +115,9 @@ const Home = () => {
                 </div>
               </Card>
             </Col>
-          ))}
+          )) : (
+            <div className="emptyContainer"> No items match </div>
+          )}
         </Row>
       </Card>
     </div>
