@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Card, Menu, Dropdown, Button, Icon, Row, Col } from 'antd'
 import { collections } from '../../data/collection'
 import './index.css'
@@ -6,6 +7,7 @@ import './index.css'
 const { Meta } = Card
 
 const Home = () => {
+  const navigate = useNavigate()
 
   const [filteredList, setFilteredList] = useState(collections)
 
@@ -32,6 +34,8 @@ const Home = () => {
       <Menu.Item key="nameAscending"> Name ascending </Menu.Item>
     </Menu>
   )
+
+  const handleCardClick = (slug)=> navigate(`/${slug}`)
 
   return (
     <div className="container">
@@ -65,6 +69,7 @@ const Home = () => {
               <Card
                 hoverable
                 className="productCard"
+                onClick={()=> handleCardClick(item.slug)}
                 cover={(
                   <img
                     className="productImage"

@@ -1,0 +1,53 @@
+.root {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.productDetailsContainer {
+    width: 320px;
+}
+
+.productCard img {
+    width: 100%;
+    aspect-ratio: 0.75;
+}
+
+.name {
+    font-size: 12px;
+}
+
+.description {
+    font-size: 12px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.listingPrice {
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.mrp {
+    font-size: 9px;
+    text-decoration: line-through;
+}
+
+.discount {
+    color: red;
+    font-size: 9px;
+}
+
+.buttonContainer {
+    height: 50px;
+    padding: 5px;
+    border: 1px solid lightgray;
+    display: flex;
+    justify-content: space-around;
+}
+
+.addToBag {
+    background-color: crimson;
+    color: white;
+}
