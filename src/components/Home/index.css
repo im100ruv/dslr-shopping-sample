@@ -1,0 +1,68 @@
+.utilityContainer {
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    width: 100%;
+    z-index: 1;
+}
+
+.utilityContainer .filterContainer, .utilityContainer .sortContainer {
+    flex-basis: 50%;
+    height: 40px;
+}
+
+.productCard img {
+    width: 100%;
+    aspect-ratio: 0.75;
+}
+
+.name {
+    font-size: 12px;
+}
+
+.description {
+    font-size: 12px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.listingPrice {
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.mrp {
+    font-size: 9px;
+    text-decoration: line-through;
+}
+
+.discount {
+    color: red;
+    font-size: 9px;
+}
+
+@media screen and (min-width: 768px) {
+    .utilityContainer {
+        position: static;
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+    }
+
+    .utilityContainer .filterContainer, .utilityContainer .sortContainer {
+        flex-basis: unset;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .filterOverlay, .sortOverlay {
+        top: calc(100vh - 112px) !important;
+        left: 0 !important;
+        width: 100%;
+    }
+
+    .sortOverlay {
+        top: calc(100vh - 176px) !important;
+    }
+}
