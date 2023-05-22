@@ -42,7 +42,11 @@ const Home = () => {
           return 0
         })
     }
-    setFilteredList(resultList)
+
+    setFilteredList(resultList.map((elem, i) => {
+      elem.index = i
+      return elem
+    }))
   }
   
   const filterMenu = (
